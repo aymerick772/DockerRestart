@@ -1,0 +1,23 @@
+version: '3.8'
+services: 
+  jupyter:
+    image: jupyter/minimal-notebook
+    ports:
+      - 8888:8888
+    user: root
+    volumes: 
+      - ./dataset:/home/jovyan/dataset
+    environment: 
+      - CHOWN_HOME=yes
+      - CHOWN_HOME_OPTS=-R
+    working_dir: "/home/${NB_USER}"  
+  basedd: 
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - volumesBdd:/var/lib/postgres/data
+volumes : 
+  volumesBdd: 
